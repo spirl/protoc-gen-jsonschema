@@ -46,7 +46,7 @@ Installation
 Install this plugin using Go:
 
 ```sh
-go install github.com/chrusty/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema@latest
+go install github.com/aaomidi/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema@latest
 ```
 
 
@@ -186,7 +186,7 @@ protoc \
 ### Disallow additional properties
 
 > JSONSchemas won't validate JSON containing extra parameters
-    
+
 ```sh
 protoc \
 --jsonschema_out=disallow_additional_properties:. \
