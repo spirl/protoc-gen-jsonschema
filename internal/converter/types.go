@@ -11,7 +11,7 @@ import (
 	"google.golang.org/protobuf/proto"
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
 
-	protoc_gen_jsonschema "github.com/aaomidi/protoc-gen-jsonschema"
+	protoc_gen_jsonschema "github.com/aaomidi/protoc-gen-jsonschema/protos/options"
 	protoc_gen_validate "github.com/envoyproxy/protoc-gen-validate/validate"
 )
 
@@ -388,7 +388,6 @@ func (c *Converter) convertField(curPkg *ProtoPackage, desc *descriptor.FieldDes
 			jsonSchemaType.Items = nil
 		}
 	}
-
 	jsonSchemaType.Required = dedupe(jsonSchemaType.Required)
 
 	return jsonSchemaType, nil
@@ -518,7 +517,6 @@ func (c *Converter) recursiveConvertMessageType(curPkg *ProtoPackage, msgDesc *d
 	if src := c.sourceInfo.GetMessage(msgDesc); src != nil {
 		jsonSchemaType.Title, jsonSchemaType.Description = c.formatTitleAndDescription(strPtr(msgDesc.GetName()), src)
 	}
-
 	// Handle google's well-known types:
 	if msgDesc.Name != nil && wellKnownTypes[*msgDesc.Name] && pkgName == ".google.protobuf" {
 		switch *msgDesc.Name {
@@ -617,12 +615,16 @@ func (c *Converter) recursiveConvertMessageType(curPkg *ProtoPackage, msgDesc *d
 				}
 
 				// "Required" fields are added to the list of required attributes in our schema:
-				if fieldOptions.GetRequired() {
-					c.logger.WithField("field_name", fieldDesc.GetName()).WithField("message_name", msgDesc.GetName()).Debug("Marking required field")
-					if c.Flags.UseJSONFieldnamesOnly {
-						jsonSchemaType.Required = append(jsonSchemaType.Required, fieldDesc.GetJsonName())
+				if (messageFlags.AllFieldsRequired || fieldOptions.GetRequired() == protoc_gen_jsonschema.TRUEFALSE_TRUE) && (fieldDesc.OneofIndex == nil && !fieldDesc.GetProto3Optional()) {
+					if fieldOptions.GetRequired() == protoc_gen_jsonschema.TRUEFALSE_FALSE {
+						c.logger.WithField("field_name", fieldDesc.GetName()).WithField("message_name", msgDesc.GetName()).Debug("All messages were required, but it was overriden for this.")
 					} else {
-						jsonSchemaType.Required = append(jsonSchemaType.Required, fieldDesc.GetName())
+						c.logger.WithField("field_name", fieldDesc.GetName()).WithField("message_name", msgDesc.GetName()).Debug("Marking required field")
+						if c.Flags.UseJSONFieldnamesOnly {
+							jsonSchemaType.Required = append(jsonSchemaType.Required, fieldDesc.GetJsonName())
+						} else {
+							jsonSchemaType.Required = append(jsonSchemaType.Required, fieldDesc.GetName())
+						}
 					}
 				}
 			}
@@ -663,17 +665,6 @@ func (c *Converter) recursiveConvertMessageType(curPkg *ProtoPackage, msgDesc *d
 			jsonSchemaType.Properties.Set(fieldDesc.GetJsonName(), recursedJSONSchemaType)
 		default:
 			jsonSchemaType.Properties.Set(fieldDesc.GetName(), recursedJSONSchemaType)
-		}
-
-		// Enforce all_fields_required:
-		if messageFlags.AllFieldsRequired {
-			if fieldDesc.OneofIndex == nil && !fieldDesc.GetProto3Optional() {
-				if c.Flags.UseJSONFieldnamesOnly {
-					jsonSchemaType.Required = append(jsonSchemaType.Required, fieldDesc.GetJsonName())
-				} else {
-					jsonSchemaType.Required = append(jsonSchemaType.Required, fieldDesc.GetName())
-				}
-			}
 		}
 
 		// Look for required fields by the proto2 "required" flag:

@@ -5,7 +5,7 @@
 syntax = "proto3";
 package protoc.gen.jsonschema;
 import "google/protobuf/descriptor.proto";
-option go_package = "github.com/aaomidi/protoc-gen-jsonschema";
+option go_package = "github.com/aaomidi/protoc-gen-jsonschema/protos";
 
 
 // Custom FieldOptions
@@ -15,7 +15,7 @@ message FieldOptions {
   bool ignore = 1;
 
   // Fields tagged with this will be marked as "required" in generated schemas
-  bool required = 2;
+  TRUEFALSE required = 2;
 
   // Fields tagged with this will constrain strings using the "minLength" keyword in generated schemas
   int32 min_length = 3;
@@ -73,6 +73,12 @@ message EnumOptions {
 
   // Enums tagged with this will not be processed
   bool ignore = 4;
+}
+
+enum TRUEFALSE {
+  UNSPECIFIED = 0;
+  TRUE = 1;
+  FALSE = 2;
 }
 
 

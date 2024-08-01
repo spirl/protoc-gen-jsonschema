@@ -15,7 +15,7 @@ fmt:
 
 .PHONY: generate
 generate:
-	@protoc --go_out=paths=source_relative:. --proto_path=. options.proto
+	@protoc --go_out=paths=source_relative:protos/options --proto_path=protos/options options.proto
 
 .PHONY: install
 install:
