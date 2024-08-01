@@ -667,6 +667,14 @@ func (c *Converter) recursiveConvertMessageType(curPkg *ProtoPackage, msgDesc *d
 			jsonSchemaType.Properties.Set(fieldDesc.GetName(), recursedJSONSchemaType)
 		}
 
+		if opt := proto.GetExtension(fieldDesc.GetOptions(), protoc_gen_jsonschema.E_FieldOptions); opt != nil {
+			if fieldOptions, ok := opt.(*protoc_gen_jsonschema.FieldOptions); ok {
+				for _, name := range fieldOptions.GetAdditionalNames() {
+					jsonSchemaType.Properties.Set(name, recursedJSONSchemaType)
+				}
+			}
+		}
+
 		// Look for required fields by the proto2 "required" flag:
 		if fieldDesc.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REQUIRED && fieldDesc.OneofIndex == nil {
 			if c.Flags.UseJSONFieldnamesOnly {

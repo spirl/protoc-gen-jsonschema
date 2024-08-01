@@ -25,6 +25,9 @@ message FieldOptions {
 
   // Fields tagged with this will constrain strings using the "pattern" keyword in generated schemas
   string pattern = 5;
+
+  // Additional names for this field.
+  repeated string additional_names = 6;
 }
 
 
