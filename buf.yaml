@@ -2,7 +2,10 @@ version: v2
 
 
 modules:
-  - path: protos/options
+  - path: .
+    excludes:
+      - protoc-gen-validate/
+      - internal/
     name: buf.build/aaomidi/protoc-gen-jsonschema
     lint:
       use:
