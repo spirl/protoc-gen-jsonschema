@@ -2,13 +2,15 @@ version: v2
 
 
 modules:
-  - path: protos/
+  - path: protos/options
     name: buf.build/aaomidi/protoc-gen-jsonschema
     lint:
       use:
         - DEFAULT
       except:
         - PACKAGE_VERSION_SUFFIX
+        - PACKAGE_DIRECTORY_MATCH
+        - ENUM_VALUE_PREFIX
     breaking:
       use:
         - FILE
