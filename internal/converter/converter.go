@@ -428,6 +428,8 @@ func (c *Converter) convert(request *plugin.CodeGeneratorRequest) (*plugin.CodeG
 	// This is required in order to "support" optional proto3 fields:
 	// https://chromium.googlesource.com/external/github.com/protocolbuffers/protobuf/+/refs/heads/master/docs/implementing_proto3_presence.md
 	response.SupportedFeatures = &gengo.SupportedFeatures
+	response.MinimumEdition = (*int32)(descriptor.Edition_EDITION_PROTO3.Enum())
+	response.MaximumEdition = (*int32)(descriptor.Edition_EDITION_PROTO3.Enum())
 
 	return response, nil
 }
