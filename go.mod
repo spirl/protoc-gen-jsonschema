@@ -11,7 +11,7 @@ require (
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.6.1
 	github.com/xeipuuv/gojsonschema v1.2.0
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/protobuf v1.34.2
 )
 
 require (
