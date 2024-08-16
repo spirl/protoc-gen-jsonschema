@@ -57,6 +57,7 @@ go_library(
         "second_message.go",
         "self_reference.go",
         "timestamp.go",
+        "type_names_with_no_package.go",
         "validation_options.go",
         "wellknown.go",
     ],
