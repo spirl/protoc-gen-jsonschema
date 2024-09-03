@@ -11,8 +11,9 @@ import (
 	"google.golang.org/protobuf/proto"
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
 
-	protoc_gen_jsonschema "github.com/aaomidi/protoc-gen-jsonschema/protos/options"
 	protoc_gen_validate "github.com/envoyproxy/protoc-gen-validate/validate"
+
+	protoc_gen_jsonschema "github.com/spirl/protoc-gen-jsonschema/protos/options"
 )
 
 var (

@@ -1,4 +1,4 @@
-module github.com/aaomidi/protoc-gen-jsonschema
+module github.com/spirl/protoc-gen-jsonschema
 
 go 1.22
 

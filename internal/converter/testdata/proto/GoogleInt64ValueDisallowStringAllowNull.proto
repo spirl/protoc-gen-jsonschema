@@ -4,5 +4,5 @@ package samples;
 import "google/protobuf/wrappers.proto";
 
 message GoogleInt64ValueDisallowStringAllowNull {
-    google.protobuf.Int64Value big_number = 1;
+  google.protobuf.Int64Value big_number = 1;
 }

@@ -3,3 +3,6 @@
 /cruft
 
 /bazel-*
+
+protoc-gen-jsonschema.linux-amd64
+protoc-gen-validate

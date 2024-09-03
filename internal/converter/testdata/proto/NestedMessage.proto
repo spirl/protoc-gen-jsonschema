@@ -4,6 +4,6 @@ package samples;
 import "PayloadMessage.proto";
 
 message NestedMessage {
-    PayloadMessage payload = 1;
-    string description = 2;
+  PayloadMessage payload = 1;
+  string description = 2;
 }

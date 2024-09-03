@@ -11,7 +11,7 @@ build:
 .PHONY: fmt
 fmt:
 	@gofmt -s -w .
-	@goimports -w -local github.com/aaomidi/protoc-gen-jsonschema .
+	@goimports -w -local github.com/spirl/protoc-gen-jsonschema .
 
 .PHONY: generate
 generate:
@@ -19,12 +19,12 @@ generate:
 
 .PHONY: install
 install:
-	@go install github.com/aaomidi/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema
+	@go install github.com/spirl/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema
 
 .PHONY: build_linux
 build_linux:
 	@echo "Generating Linux-amd64 binary (protoc-gen-jsonschema.linux-amd64) ..."
-	@GOOS=linux GOARCH=amd64 go build -o protoc-gen-jsonschema.linux-amd64
+	@GOOS=linux GOARCH=amd64 go build -o protoc-gen-jsonschema.linux-amd64 ./cmd/protoc-gen-jsonschema
 
 .PHONY: samples
 samples: build
@@ -66,7 +66,7 @@ samples: build
 	@protoc --plugin=bin/protoc-gen-jsonschema --jsonschema_out=jsonschemas --proto_path=${PROTO_PATH} ${PROTO_PATH}/WellKnown.proto || echo "No messages found (WellKnown.proto)"
 	@protoc --plugin=bin/protoc-gen-jsonschema --jsonschema_out=jsonschemas --proto_path=${PROTO_PATH} ${PROTO_PATH}/NoPackage.proto
 	@protoc --plugin=bin/protoc-gen-jsonschema --jsonschema_out=messages=[MessageKind10+MessageKind11+MessageKind12]:jsonschemas --proto_path=${PROTO_PATH} ${PROTO_PATH}/TwelveMessages.proto || echo "No messages found (TwelveMessages.proto)"
-	@protoc --plugin=bin/protoc-gen-jsonschema --jsonschema_out=jsonschemas options.proto || echo "No messages found (options.proto)"
+	@protoc --plugin=bin/protoc-gen-jsonschema --jsonschema_out=jsonschemas protos/options/options.proto || echo "No messages found (options.proto)"
 
 .PHONY: test
 test:

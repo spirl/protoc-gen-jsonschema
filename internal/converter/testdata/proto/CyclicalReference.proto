@@ -6,16 +6,16 @@ message M {
 }
 
 message Foo {
-  string name      = 1;
+  string name = 1;
   repeated Bar bar = 2;
 }
 
 message Bar {
   uint32 id = 1;
-  Baz baz   = 2;
+  Baz baz = 2;
 }
 
 message Baz {
   bool enabled = 1;
-  Foo foo      = 2;
+  Foo foo = 2;
 }
