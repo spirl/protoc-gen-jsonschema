@@ -4,13 +4,13 @@
 
 syntax = "proto3";
 package protoc.gen.jsonschema;
-import "google/protobuf/descriptor.proto";
-option go_package = "github.com/aaomidi/protoc-gen-jsonschema/protos/options";
 
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/spirl/protoc-gen-jsonschema/protos/options";
 
 // Custom FieldOptions
 message FieldOptions {
-
   // Fields tagged with this will be omitted from generated schemas
   bool ignore = 1;
 
@@ -30,10 +30,8 @@ message FieldOptions {
   repeated string additional_names = 6;
 }
 
-
 // Custom FileOptions
 message FileOptions {
-
   // Files tagged with this will not be processed
   bool ignore = 1;
 
@@ -41,10 +39,8 @@ message FileOptions {
   string extension = 2;
 }
 
-
 // Custom MessageOptions
 message MessageOptions {
-
   // Messages tagged with this will not be processed
   bool ignore = 1;
 
@@ -61,10 +57,8 @@ message MessageOptions {
   bool enums_as_constants = 5;
 }
 
-
 // Custom EnumOptions
 message EnumOptions {
-
   // Enums tagged with this will have be encoded to use constants instead of simple types (supports value annotations):
   bool enums_as_constants = 1;
 
@@ -83,7 +77,6 @@ enum TRUEFALSE {
   TRUE = 1;
   FALSE = 2;
 }
-
 
 extend google.protobuf.FieldOptions {
   FieldOptions field_options = 1125;

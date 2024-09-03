@@ -46,7 +46,7 @@ Installation
 Install this plugin using Go:
 
 ```sh
-go install github.com/aaomidi/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema@latest
+go install github.com/spirl/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema@latest
 ```
 
 

@@ -1,6 +1,7 @@
 syntax = "proto3";
 package samples;
-import "options.proto";
+
+import "protos/options/options.proto";
 
 // This is an enum
 enum ImportedEnum {

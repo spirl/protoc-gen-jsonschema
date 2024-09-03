@@ -9,8 +9,23 @@
                     "description": "Fields tagged with this will be omitted from generated schemas"
                 },
                 "required": {
-                    "type": "boolean",
-                    "description": "Fields tagged with this will be marked as \"required\" in generated schemas"
+                    "enum": [
+                        "UNSPECIFIED",
+                        0,
+                        "TRUE",
+                        1,
+                        "FALSE",
+                        2
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "TRUEFALSE"
                 },
                 "min_length": {
                     "type": "integer",
@@ -23,6 +38,13 @@
                 "pattern": {
                     "type": "string",
                     "description": "Fields tagged with this will constrain strings using the \"pattern\" keyword in generated schemas"
+                },
+                "additional_names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "Additional names for this field."
                 }
             },
             "additionalProperties": true,

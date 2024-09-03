@@ -1,6 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
-# gazelle:prefix github.com/aaomidi/protoc-gen-jsonschema
+# gazelle:prefix github.com/spirl/protoc-gen-jsonschema
 # gazelle:go_generate_proto false
 # gazelle:proto disable
 gazelle(name = "gazelle")

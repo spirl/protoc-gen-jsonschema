@@ -4,6 +4,6 @@ package samples;
 import "PayloadMessage.proto";
 
 message ArrayOfMessages {
-    string description              = 1;
-    repeated PayloadMessage payload = 2;
+  string description = 1;
+  repeated PayloadMessage payload = 2;
 }

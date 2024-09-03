@@ -1,6 +1,7 @@
 syntax = "proto3";
 package samples;
-import "options.proto";
+
+import "protos/options/options.proto";
 
 enum Scheme {
   option (protoc.gen.jsonschema.enum_options).enums_trim_prefix = true;

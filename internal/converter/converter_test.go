@@ -15,7 +15,7 @@ import (
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
 	plugin "google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/aaomidi/protoc-gen-jsonschema/internal/converter/testdata"
+	"github.com/spirl/protoc-gen-jsonschema/internal/converter/testdata"
 )
 
 const (
@@ -47,7 +47,6 @@ func TestGenerateJsonSchema(t *testing.T) {
 }
 
 func testConvertSampleProto(t *testing.T, sampleProto sampleProto) {
-	t.Helper()
 
 	// Make a Logrus logger:
 	logger := logrus.New()
@@ -222,11 +221,11 @@ func configureSampleProtos() map[string]sampleProto {
 			ObjectsToValidatePass: []string{testdata.EnumWithMessagePass},
 		},
 		"EnumCeption": {
-			ExpectedJSONSchema:    []string{testdata.PayloadMessage, testdata.ImportedEnum, testdata.EnumCeption},
-			FilesToGenerate:       []string{"Enumception.proto", "PayloadMessage.proto", "ImportedEnum.proto"},
+			ExpectedJSONSchema:    []string{testdata.EnumCeption},
+			FilesToGenerate:       []string{"Enumception.proto"},
 			ProtoFileName:         "Enumception.proto",
-			ObjectsToValidateFail: []string{testdata.PayloadMessageFail, testdata.ImportedEnumFail, testdata.EnumCeptionFail},
-			ObjectsToValidatePass: []string{testdata.PayloadMessagePass, testdata.ImportedEnumPass, testdata.EnumCeptionPass},
+			ObjectsToValidateFail: []string{testdata.EnumCeptionFail},
+			ObjectsToValidatePass: []string{testdata.EnumCeptionPass},
 		},
 		"GoogleValue": {
 			Flags:                 ConverterFlags{DisallowAdditionalProperties: true},

@@ -61,6 +61,6 @@ go_library(
         "validation_options.go",
         "wellknown.go",
     ],
-    importpath = "github.com/aaomidi/protoc-gen-jsonschema/internal/converter/testdata",
+    importpath = "github.com/spirl/protoc-gen-jsonschema/internal/converter/testdata",
     visibility = ["//:__subpackages__"],
 )
