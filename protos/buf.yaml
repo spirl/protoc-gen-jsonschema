@@ -3,7 +3,7 @@ version: v2
 
 modules:
   - path: .
-    name: buf.build/aaomidi/protoc-gen-jsonschema
+    name: buf.build/spirl/protoc-gen-jsonschema
     lint:
       use:
         - DEFAULT
