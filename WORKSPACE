@@ -28,9 +28,16 @@ http_archive(
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 load("//:deps.bzl", "go_dependencies")
+
+go_repository(
+    name = "com_github_ettle_strcase",
+    importpath = "github.com/ettle/strcase",
+    sum = "h1:fGNiVF21fHXpX1niBgk0aROov1LagYsOwV/xqKDKR/Q=",
+    version = "v0.2.0",
+)
 
 go_register_toolchains(version = "1.20.4")
 

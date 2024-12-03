@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/alecthomas/jsonschema"
-	"github.com/iancoleman/strcase"
 	"github.com/sirupsen/logrus"
 	"github.com/xeipuuv/gojsonschema"
 	gengo "google.golang.org/protobuf/cmd/protoc-gen-go/internal_gengo"
@@ -203,7 +202,7 @@ func (c *Converter) convertEnumType(enum *descriptor.EnumDescriptorProto, conver
 	}
 
 	// If we need to trim prefix from enum value
-	enumNamePrefix := fmt.Sprintf("%s_", strcase.ToScreamingSnake(*enum.Name))
+	enumNamePrefix := fmt.Sprintf("%s_", caser.ToSNAKE(*enum.Name))
 
 	// We have found an enum, append its values:
 	for _, value := range enum.Value {

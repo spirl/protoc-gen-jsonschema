@@ -3,8 +3,8 @@ package converter
 import (
 	"strings"
 
+	"github.com/ettle/strcase"
 	"github.com/fatih/camelcase"
-	"github.com/iancoleman/strcase"
 	"google.golang.org/protobuf/proto"
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
 )
@@ -20,6 +20,28 @@ const (
 	tag_Descriptor_enumType        int32 = 4
 	tag_Descriptor_oneofDecl       int32 = 8
 	tag_EnumDescriptor_value       int32 = 2
+)
+
+var (
+	// This caser is compatible with iancoleman/strcase, except with some
+	// overridden "initialisms" some acronyms no longer handled by the former
+	// package.
+	caser = strcase.NewCaser(
+		false,
+		map[string]bool{
+			"API":  true,
+			"AWS":  true,
+			"CSI":  true,
+			"GRPC": true,
+			"JWT":  true,
+			"TLS":  true,
+		},
+		strcase.NewSplitFn([]rune{'_', '-', '.'},
+			strcase.SplitCase,
+			strcase.SplitAcronym,
+			strcase.SplitBeforeNumber,
+		),
+	)
 )
 
 type sourceCodeInfo struct {
@@ -126,7 +148,7 @@ func (c *Converter) formatTitleAndDescription(name *string, sl *descriptor.Sourc
 
 	// Default title is camel-cased & split name:
 	if name != nil {
-		camelName := strcase.ToCamel(*name)
+		camelName := caser.ToPascal(*name)
 		splitName := camelcase.Split(camelName)
 		title = strings.Join(splitName, " ")
 	}
